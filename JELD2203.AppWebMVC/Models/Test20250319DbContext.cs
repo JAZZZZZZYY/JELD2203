@@ -23,15 +23,11 @@ public partial class Test20250319DbContext : DbContext
 
     public virtual DbSet<Warehouse> Warehouses { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=LAPTOP-FRMPB979\\SQLEXPRESS01;Initial Catalog=Test20250319DB;Integrated Security=True;Encrypt=False");
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Brand>(entity =>
         {
-            entity.HasKey(e => e.BrandId).HasName("PK__Brands__DAD4F3BE4C9582C1");
+            entity.HasKey(e => e.BrandId).HasName("PK__Brands__DAD4F3BE9C34767E");
 
             entity.Property(e => e.BrandId).HasColumnName("BrandID");
             entity.Property(e => e.BrandName)
@@ -44,7 +40,7 @@ public partial class Test20250319DbContext : DbContext
 
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId).HasName("PK__Products__B40CC6EDCFF29442");
+            entity.HasKey(e => e.ProductId).HasName("PK__Products__B40CC6ED2F903BDF");
 
             entity.Property(e => e.ProductId).HasColumnName("ProductID");
             entity.Property(e => e.BrandId).HasColumnName("BrandID");
@@ -53,7 +49,7 @@ public partial class Test20250319DbContext : DbContext
             entity.Property(e => e.ProductName)
                 .HasMaxLength(255)
                 .IsUnicode(false);
-            entity.Property(e => e.WarehouseId).HasColumnName("WarehouseID");
+            entity.Property(e => e.WarehouseId).HasColumnName("WarehouseId");
 
             entity.HasOne(d => d.Brand).WithMany(p => p.Products)
                 .HasForeignKey(d => d.BrandId)
@@ -61,14 +57,14 @@ public partial class Test20250319DbContext : DbContext
 
             entity.HasOne(d => d.Warehouse).WithMany(p => p.Products)
                 .HasForeignKey(d => d.WarehouseId)
-                .HasConstraintName("FK__Products__Wareho__3B75D760");
+                .HasConstraintName("FK_Products_Warehouse");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCACF0FB82B1");
+            entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCAC0256874F");
 
-            entity.HasIndex(e => e.Email, "UQ__Users__A9D1053433D97FCE").IsUnique();
+            entity.HasIndex(e => e.Email, "UQ__Users__A9D1053432DDF4E9").IsUnique();
 
             entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.Email)
@@ -88,7 +84,7 @@ public partial class Test20250319DbContext : DbContext
 
         modelBuilder.Entity<Warehouse>(entity =>
         {
-            entity.HasKey(e => e.WarehouseId).HasName("PK__Warehous__2608AFD99947D7AD");
+            entity.HasKey(e => e.WarehouseId).HasName("PK__Categori__19093A2B18E63817");
 
             entity.Property(e => e.WarehouseId).HasColumnName("WarehouseID");
             entity.Property(e => e.Notes).HasColumnType("text");
